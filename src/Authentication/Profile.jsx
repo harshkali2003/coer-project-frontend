@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 export default function Profile() {
     const auth = localStorage.getItem('User')
+    const navigate = useNavigate()
     const RemoveUser = (e) =>{
       e.preventDefault()
       localStorage.clear()
@@ -27,7 +28,7 @@ export default function Profile() {
             
           </div>
           <button  onClick={RemoveUser} className='bg-red-600 m-2'>Log Out</button>
-          <button className='bg-blue-500'><Link to={"/update/:id"}> UPDATE</Link></button>
+          <button className='bg-blue-500'><Link to={`/update/` + JSON.parse(auth)._id}> UPDATE</Link></button>
         </div>
        
       </div>

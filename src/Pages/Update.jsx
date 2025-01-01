@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState , useEffect} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -15,7 +15,7 @@ export default function Update() {
   
   
     const getUserDetails = async () => {
-      let data = await fetch(`http://localhost:5000/user/${params.id}`);
+      let data = await fetch(`http://localhost:5000/user/detail/${params.id}`);
       let result = await data.json();
       console.log(result);
       setName(result.name)
@@ -25,10 +25,10 @@ export default function Update() {
   
     const updateRecord = async (e) => {
       e.preventDefault()
-      let data = await fetch(`http://localhost:5000/user/${params.id}`, {
+      let data = await fetch(`http://localhost:5000/user/update/${params.id}`, {
         method: "Put",
         body: JSON.stringify({ name, email, password}),
-        headers: { "Content-Type": "application/json" ,  authorization :`bearer ${JSON.parse(localStorage.getItem('Token'))}`  },
+        headers: { "Content-Type": "application/json"   },
       });
       let result = await data.json();
       if (result) {
@@ -104,7 +104,7 @@ export default function Update() {
 
             <button
               type="submit"
-              onClick={SignUser}
+              onClick={updateRecord}
               className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               UPDATE

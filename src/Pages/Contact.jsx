@@ -11,7 +11,7 @@ export default function Contact() {
     let data = await fetch('http://localhost:5000/user/query' , {
       method : "post" , 
       body : JSON.stringify({name , email , message}),
-      headers : {'Content-Type' : 'application/json' , authorization :`bearer ${JSON.parse(localStorage.getItem('Token'))}`}
+      headers : {'Content-Type' : 'application/json' }
     })
     let result = await data.json()
     if(result){

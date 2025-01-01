@@ -6,10 +6,11 @@ export default function Footer() {
   const [email , setEmail] = useState("")
   const navigate = useNavigate()
   const subscribeUser = async (e) =>{
+    e.preventDefault()
     let data = await fetch('http://localhost:5000/user/subscribe' , {
       method : "post" , 
       body : JSON.stringify({email}),
-      headers : {'Content-Type' : 'application/json' , authorization :`bearer ${JSON.parse(localStorage.getItem('Token'))}`}
+      headers : {'Content-Type' : 'application/json' }
     })
     let result = await data.json()
     if(result){
